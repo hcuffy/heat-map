@@ -1,7 +1,7 @@
 {
   "name": "heat-map",
   "version": "1.0.0",
-  "description": "A heat map displaying the monthly global surface temperature",
+  "description": "A heat map displaying the monthly global surface temperature.",
   "main": "server.js",
   "repository": "https://github.com/hcuffy/heat-map.git",
   "author": "Henry Cuffy",

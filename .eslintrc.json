@@ -40,14 +40,23 @@
       "error",
       "always"
     ],
-    "no-unused-vars": ["warn", {
-      "vars": "all",
-      "args": "none"
-    }],
-    "arrow-spacing": ["error", {
-      "before": true,
-      "after": true
-    }]
-
+    "template-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "always"
+    ],
+    "func-call-spacing": [
+      "error",
+      "never"
+    ],
+    "space-in-parens": [
+      "error",
+      "never"
+    ],
+    "no-unused-vars": "error",
+    "arrow-spacing": "error"
   }
 }
