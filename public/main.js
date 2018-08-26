@@ -6,7 +6,7 @@ $(document).ready(function() {
 			const width = 900
 			const height = 500
 			const padding = 20
-		  var dataset = []
+		  let dataset = []
 			const baseTemp = data.baseTemperature
 
 			data.monthlyVariance.forEach((entry) => {
@@ -15,26 +15,44 @@ $(document).ready(function() {
 
 			const maxYear = d3.max(dataset, d => d[0])
 			const minYear = d3.min(dataset, d => d[0])
-
+			const colorDomain = [ 1,2,3,4,5,6,7,8,9,10,11,12,13 ]
+			const colorRange = [
+                  				'#3d86d3',
+                  				'#47a9c1',
+                  				'#58d3c5',
+                  				'#3fc18b',
+                  				'#40c143',
+                  				'#40c143',
+                  				'#7fc141',
+                  				'#7ec13f',
+                  				'#a9c140',
+                  				'#c4b121',
+                  				'#d1801d',
+                  				'#d1491b',
+				'#d1361b'
+			                   ]
 			const maxVariance = d3.max(dataset, d => d[2])
 			const minVariance = d3.min(dataset, d => d[2])
-			console.log(maxVariance + ' '+ minVariance)
 
-
-			var xScale = d3
+			let xScale = d3
 				.scaleLinear()
 				.domain([ minYear, maxYear ])
 				.range([ 0, width ])
 
-			var yScale = d3
+			let yScale = d3
 				.scaleLinear()
 				.domain([ 11 , 0 ])
 				.range([ height , (height/12) ])
 
+			let colorScale = d3.scaleQuantile()
+				.domain(colorDomain)
+				.range(colorRange)
+
+			console.log(colorScale(13))
 			// const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'))
 			// const yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat(specifier))
 			//
-			var svg = d3.select('.chart')
+			let svg = d3.select('.chart')
 				.append('svg')
 				.attr('width', width)
 				.attr('height', height)
@@ -50,8 +68,7 @@ $(document).ready(function() {
 				.attr('width', 2)
 				.attr('height', d => yScale(d[1]))
 				.attr('fill', d => {
-				  let circleColor =  d[1] == 2 ? '#6bff83' : '#f70018'
-					 return circleColor
+					 return colorScale(Math.floor(baseTemp + d[2]))
 				})
 
 		}
