@@ -4,8 +4,7 @@ $(document).ready(function() {
 		function(data) {
 
 			const width = 900
-			const height = 500
-			const padding = 20
+			const height = 600
 		  let dataset = []
 			const baseTemp = data.baseTemperature
 
@@ -13,26 +12,24 @@ $(document).ready(function() {
 			    dataset.push([ entry.year, entry.month - 1, entry.variance ])
 			})
 
-			const maxYear = d3.max(dataset, d => d[0])
+			const maxYear = (d3.max(dataset, d => d[0]) + 2)
 			const minYear = d3.min(dataset, d => d[0])
 			const colorDomain = [ 1,2,3,4,5,6,7,8,9,10,11,12,13 ]
 			const colorRange = [
-                  				'#3d86d3',
-                  				'#47a9c1',
-                  				'#58d3c5',
-                  				'#3fc18b',
-                  				'#40c143',
-                  				'#40c143',
-                  				'#7fc141',
-                  				'#7ec13f',
-                  				'#a9c140',
-                  				'#c4b121',
-                  				'#d1801d',
-                  				'#d1491b',
+				'#3d86d3',
+				'#47a9c1',
+				'#58d3c5',
+				'#3fc18b',
+				'#40c143',
+				'#40c143',
+				'#7fc141',
+				'#7ec13f',
+				'#a9c140',
+				'#c4b121',
+				'#d1801d',
+				'#d1491b',
 				'#d1361b'
-			                   ]
-			const maxVariance = d3.max(dataset, d => d[2])
-			const minVariance = d3.min(dataset, d => d[2])
+		 ]
 
 			let xScale = d3
 				.scaleLinear()
@@ -42,21 +39,24 @@ $(document).ready(function() {
 			let yScale = d3
 				.scaleLinear()
 				.domain([ 11 , 0 ])
-				.range([ height , (height/12) ])
+				.range([ height  , 0 ])
 
 			let colorScale = d3.scaleQuantile()
 				.domain(colorDomain)
 				.range(colorRange)
 
-			console.log(colorScale(13))
-			// const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'))
-			// const yAxis = d3.axisLeft(yScale).tickFormat(d3.timeFormat(specifier))
-			//
+			let  tickFormatter = (month) => {
+				let monthFormatter = d3.timeFormat('%B')
+				return monthFormatter(new Date(minYear, month))
+			}
+			const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'))
+			const yAxis = d3.axisLeft(yScale).tickFormat(tickFormatter).tickSize([ 0 ])
+
 			let svg = d3.select('.chart')
 				.append('svg')
 				.attr('width', width)
 				.attr('height', height)
-				.style('padding', padding)
+				.style('padding', '20 20 100 80')
 
 			svg
 				.selectAll('rect')
@@ -65,11 +65,26 @@ $(document).ready(function() {
       	.append('rect')
       	.attr('x', d => xScale(d[0]))
       	.attr('y', d => yScale(d[1]))
-				.attr('width', 2)
-				.attr('height', d => yScale(d[1]))
+				.attr('width', 4)
+				.attr('height', (height/10))
+				.attr('class', 'cell')
 				.attr('fill', d => {
 					 return colorScale(Math.floor(baseTemp + d[2]))
 				})
+
+			svg
+				.append('g')
+				.attr('transform', 'translate(0,'+ (height + 61)+')')
+				.attr('id', 'x-axis')
+				.call(xAxis)
+
+			svg
+				.append('g')
+				.attr('transform', 'translate(0,'+(height/20)+')')
+				.attr('id', 'y-axis')
+				.call(yAxis)
+
+
 
 		}
 	)
