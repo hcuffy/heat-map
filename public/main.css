@@ -1,6 +1,20 @@
 body {
   background-color: #264566;
 }
+
 h3, h1 {
   text-align: center;
+}
+
+#y-axis path {
+  stroke: none;
+}
+
+#x-axis path, #x-axis line {
+  stroke: #ededed;
+}
+
+#x-axis text, #y-axis text {
+  fill: #ededed;
+  font-size: 14px;
 }
