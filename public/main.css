@@ -18,3 +18,8 @@ h3, h1 {
   fill: #ededed;
   font-size: 14px;
 }
+
+.axis-label {
+  font-size: 20px;
+  fill: #329e7a;
+}

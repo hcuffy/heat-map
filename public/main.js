@@ -56,7 +56,7 @@ $(document).ready(function() {
 				.append('svg')
 				.attr('width', width)
 				.attr('height', height)
-				.style('padding', '20 20 100 80')
+				.style('padding', '20 20 140 150')
 
 			svg
 				.selectAll('rect')
@@ -84,7 +84,39 @@ $(document).ready(function() {
 				.attr('id', 'y-axis')
 				.call(yAxis)
 
+			svg.append('text')
+				.attr('class', 'axis-label')
+				.attr('x', - (height / 2))
+				.attr('y', - 100)
+				.attr('transform', 'rotate(-90)')
+				.text('Calendar Months')
 
+			svg.append('text')
+				.attr('class', 'axis-label')
+				.attr('x', (width / 2))
+				.attr('y', (height + 120))
+				.text('Years: 1753 - 2015')
+
+			var legend =	svg
+				.selectAll('.legend')
+				.data(colorRange)
+				.enter()
+				.append('g')
+		    .attr('id', 'legend')
+		    .attr('transform', (d , i) => {
+		      return 'translate('+(-800 + i * 23)+',' + (height + 100)+ ')'
+		    })
+
+			  legend
+				  .append('rect')
+			    .attr('x', width - 50)
+			    .attr('width', 23)
+			    .attr('height', 23)
+			    .style('fill',  color => {
+						 return color
+				})
+
+				
 
 		}
 	)
