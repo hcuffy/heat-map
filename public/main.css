@@ -1,5 +1,6 @@
 body {
   background-color: #264566;
+  height: 2000px;
 }
 
 h1 {
@@ -33,4 +34,14 @@ h1 {
 #description {
   fill: #ededed;
   font-size: 20px;
+}
+
+#tooltip {
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  position: absolute;
+  text-align: left;
+  font-size: 15px;
+  color: #000000;
+  background: #ededed;
 }
