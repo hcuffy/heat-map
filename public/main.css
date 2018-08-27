@@ -2,8 +2,9 @@ body {
   background-color: #264566;
 }
 
-h3, h1 {
+h1 {
   text-align: center;
+  color: #329e7a;
 }
 
 #y-axis path {
@@ -22,4 +23,14 @@ h3, h1 {
 .axis-label {
   font-size: 20px;
   fill: #329e7a;
+}
+
+#legend text {
+  fill: #ededed;
+  font-size: 10px;
+}
+
+#description {
+  fill: #ededed;
+  font-size: 20px;
 }

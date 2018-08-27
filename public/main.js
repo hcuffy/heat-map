@@ -56,7 +56,7 @@ $(document).ready(function() {
 				.append('svg')
 				.attr('width', width)
 				.attr('height', height)
-				.style('padding', '20 20 140 150')
+				.style('padding', '40 20 140 150')
 
 			svg
 				.selectAll('rect')
@@ -71,6 +71,12 @@ $(document).ready(function() {
 				.attr('fill', d => {
 					 return colorScale(Math.floor(baseTemp + d[2]))
 				})
+
+			svg.append('text')
+				.attr('id', 'description')
+				.attr('x', (width / 4))
+				.attr('y', (-20))
+				.text('The monthly global surface temperature where the base is 8.66°')
 
 			svg
 				.append('g')
@@ -97,7 +103,7 @@ $(document).ready(function() {
 				.attr('y', (height + 120))
 				.text('Years: 1753 - 2015')
 
-			var legend =	svg
+			let legend =	svg
 				.selectAll('.legend')
 				.data(colorRange)
 				.enter()
@@ -116,7 +122,15 @@ $(document).ready(function() {
 						 return color
 				})
 
-				
+			legend
+			  .append('text')
+		    .attr('x', width - 40)
+		    .attr('y', 35)
+		    .text((d , i) => {
+					let legendText =  colorDomain[i]
+					return legendText + '°'
+
+				})
 
 		}
 	)
