@@ -8,11 +8,11 @@ h1 {
   color: #329e7a;
 }
 
-#y-axis path {
-  stroke: none;
+#x-axis path, #x-axis line {
+  stroke: #ededed;
 }
 
-#x-axis path, #x-axis line {
+#y-axis path, #y-axis line {
   stroke: #ededed;
 }
 
