@@ -30,7 +30,8 @@ $(document).ready(function() {
 				'#d1491b',
 				'#d1361b'
 		 ]
-
+		 
+			let ytickValues =[ 0,1,2,3,4,5,6,7,8,9,10,11 ]
 			let xScale = d3
 				.scaleLinear()
 				.domain([ minYear, maxYear ])
@@ -38,7 +39,7 @@ $(document).ready(function() {
 
 			let yScale = d3
 				.scaleLinear()
-				.domain([ 12 , 0 ])
+				.domain([ 11 , 0 ])
 				.range([ height  , 0 ])
 
 			let colorScale = d3.scaleQuantile()
@@ -49,8 +50,9 @@ $(document).ready(function() {
 			let  tickFormatter = (month) => {
 				return monthFormatter(new Date(minYear, month))
 			}
+
 			const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'))
-			const yAxis = d3.axisLeft(yScale).tickFormat(tickFormatter).tickSize([ 0 ])
+			const yAxis = d3.axisLeft(yScale).tickValues(ytickValues).tickFormat(tickFormatter)
 
 			var tooltip = d3
 				.select('.chart')
@@ -60,10 +62,8 @@ $(document).ready(function() {
 			let svg = d3.select('.chart')
 				.append('svg')
 				.attr('width', width)
-				.attr('height', height)
+				.attr('height', height + 60)
 				.style('padding', '40 20 140 150')
-				.style('background-color', 'navy')
-				.style('pointer-events', 'all')
 
 			svg
 				.selectAll('rect')
@@ -88,9 +88,8 @@ $(document).ready(function() {
 						.style('visibility', 'visible')
 					tooltip
 						.attr('data-year', d[0])
-						.html(d[0] + ', ' + monthFormatter(new Date(d[0], d[1]))+'</br>')
+						.html(d[0] + ', ' + monthFormatter(new Date(d[0], d[1]))+'</br>'+ 'Temperature: ' + Math.round((baseTemp + d[2]) * 10) /10 + '°C')
 						.style('left', (d3.event.pageX + 10) + 'px')
-						.style('top', (d3.event.pageY + 10) + 'px')
 						.style('top', (d3.event.pageY + 10) + 'px')
 				})
 
@@ -106,7 +105,7 @@ $(document).ready(function() {
 
 			svg
 				.append('g')
-				.attr('transform', 'translate(0,'+ (height + 10)+')')
+				.attr('transform', 'translate(0,'+ (height + 60)+')')
 				.attr('id', 'x-axis')
 				.call(xAxis)
 
