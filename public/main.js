@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 			let yScale = d3
 				.scaleLinear()
-				.domain([ 11 , 0 ])
+				.domain([ 12 , 0 ])
 				.range([ height  , 0 ])
 
 			let colorScale = d3.scaleQuantile()
@@ -91,71 +91,72 @@ $(document).ready(function() {
 						.html(d[0] + ', ' + monthFormatter(new Date(d[0], d[1]))+'</br>')
 						.style('left', (d3.event.pageX + 10) + 'px')
 						.style('top', (d3.event.pageY + 10) + 'px')
+						.style('top', (d3.event.pageY + 10) + 'px')
 				})
 
 			svg.on('mouseout', () => {
 				tooltip.transition().style('visibility', 'hidden')
 			})
 
-			// svg.append('text')
-			// 	.attr('id', 'description')
-			// 	.attr('x', (width / 4))
-			// 	.attr('y', (-20))
-			// 	.text('The monthly global surface temperature where the base is 8.66°')
+			svg.append('text')
+				.attr('id', 'description')
+				.attr('x', (width / 4))
+				.attr('y', (-20))
+				.text('The monthly global surface temperature where the base is 8.66°')
 
-			// svg
-			// 	.append('g')
-			// 	.attr('transform', 'translate(0,'+ (height + 61)+')')
-			// 	.attr('id', 'x-axis')
-			// 	.call(xAxis)
+			svg
+				.append('g')
+				.attr('transform', 'translate(0,'+ (height + 10)+')')
+				.attr('id', 'x-axis')
+				.call(xAxis)
 
-			// svg
-			// 	.append('g')
-			// 	.attr('transform', 'translate(0,'+(height/20)+')')
-			// 	.attr('id', 'y-axis')
-			// 	.call(yAxis)
+			svg
+				.append('g')
+				.attr('transform', 'translate(0,'+(height/20)+')')
+				.attr('id', 'y-axis')
+				.call(yAxis)
 
-			// svg.append('text')
-			// 	.attr('class', 'axis-label')
-			// 	.attr('x', - (height / 2))
-			// 	.attr('y', - 100)
-			// 	.attr('transform', 'rotate(-90)')
-			// 	.text('Calendar Months')
+			svg.append('text')
+				.attr('class', 'axis-label')
+				.attr('x', - (height / 2))
+				.attr('y', - 100)
+				.attr('transform', 'rotate(-90)')
+				.text('Calendar Months')
 
-			// svg.append('text')
-			// 	.attr('class', 'axis-label')
-			// 	.attr('x', (width / 2))
-			// 	.attr('y', (height + 120))
-			// 	.text('Years: 1753 - 2015')
-			//
-			// let legend =	svg
-			// 	.selectAll('.legend')
-			// 	.data(colorRange)
-			// 	.enter()
-			// 	.append('g')
-		  //   .attr('id', 'legend')
-		  //   .attr('transform', (d , i) => {
-		  //     return 'translate('+(-800 + i * 23)+',' + (height + 100)+ ')'
-		  //   })
-			//
-			// legend
-			//   .append('rect')
-		  //   .attr('x', width - 50)
-		  //   .attr('width', 23)
-		  //   .attr('height', 23)
-		  //   .style('fill',  color => {
-			// 		 return color
-	    //   })
-			//
-			// legend
-			//   .append('text')
-		  //   .attr('x', width - 40)
-		  //   .attr('y', 35)
-		  //   .text((d , i) => {
-			// 		let legendText =  colorDomain[i]
-			// 		return legendText + '°'
-			//
-			// 	})
+			svg.append('text')
+				.attr('class', 'axis-label')
+				.attr('x', (width / 2))
+				.attr('y', (height + 120))
+				.text('Years: 1753 - 2015')
+
+			let legend =	svg
+				.selectAll('.legend')
+				.data(colorRange)
+				.enter()
+				.append('g')
+		    .attr('id', 'legend')
+		    .attr('transform', (d , i) => {
+		      return 'translate('+(-800 + i * 23)+',' + (height + 100)+ ')'
+		    })
+
+			legend
+			  .append('rect')
+		    .attr('x', width - 50)
+		    .attr('width', 23)
+		    .attr('height', 23)
+		    .style('fill',  color => {
+					 return color
+	      })
+
+			legend
+			  .append('text')
+		    .attr('x', width - 40)
+		    .attr('y', 35)
+		    .text((d , i) => {
+					let legendText =  colorDomain[i]
+					return legendText + '°'
+
+				})
 
 		}
 	)
