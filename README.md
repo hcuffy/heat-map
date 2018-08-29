@@ -1,6 +1,6 @@
 # Message Board
 
-Displaying a D3 heat map displaying the monthly global surface temperature from 1753-2015.
+A D3 heat map displaying the monthly global surface temperature from 1753-2015.
 
 Live App: <https://knowing-guarantee.glitch.me/>
 
